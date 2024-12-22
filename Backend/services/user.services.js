@@ -19,15 +19,4 @@ const createUser = async ({ firstname, lastname, email, password }) => {
   return newUser;
 }
 
-const getUser = async ({ email, password }) => {
-  if (!email || !password) {
-    throw new Error("All fields are required");
-  }
-  const user = await UserModel.findOne({ email });
-  const isMatch = await user.comparePassword({ password });
-  console.log(isMatch);
-  // const users = await UserModel.find({ email: email, password: UserModel.comparePassword(password) });
-  return user;
-}
-
-export { createUser, getUser }
+export { createUser }
