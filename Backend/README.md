@@ -84,7 +84,7 @@ Example:
 
 ## Endpoint: `/user/login`
 
-### Method: GET
+### Method: POST
 
 ### Description:
 
@@ -143,15 +143,62 @@ Example:
 - Ensure that the `Content-Type` header is set to `application/json` when making requests to this endpoint.
 - The `token` returned in the response should be stored securely and used for authenticated requests to other endpoints.
 
-# User Logout Endpoint Documentation
+# User Profile Endpoint Documentation
 
-## Endpoint: `/user/logout`
+## Endpoint: `/user/profile`
 
 ### Method: GET
 
 ### Description:
 
-This endpoint is used to log out the currently authenticated user.
+This endpoint is used to get the profile of the currently authenticated user.
+
+### Responses:
+
+#### Success (200):
+
+- **Description**: User profile retrieved successfully.
+- **Body**: A JSON object containing the user details.
+
+```json
+{
+	"user": {
+		"_id": "user_id",
+		"fullname": {
+			"firstname": "John",
+			"lastname": "Doe"
+		},
+		"email": "john.doe@example.com"
+	},
+	"message": "user loggedin"
+}
+```
+
+#### Client Error (401):
+
+- **Description**: Unauthorized access.
+- **Body**: A JSON object containing an error message.
+
+```json
+{
+	"message": "Unauthorized"
+}
+```
+
+### Notes:
+
+- Ensure that the `Content-Type` header is set to `application/json` when making requests to this endpoint.
+- The `token` returned in the response should be stored securely and used for authenticated requests to other endpoints.
+
+# User Logout Endpoint Documentation
+
+## Endpoint: `/user/logout`
+
+### Method: POST
+
+### Description:
+
+This endpoint is used to log out the currently authenticated user and blocklist the token provided in cookies and headers.
 
 ### Responses:
 

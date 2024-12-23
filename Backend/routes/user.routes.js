@@ -1,10 +1,11 @@
 import express from 'express';
-import { loginUser, registerUser, logoutUser } from '../controllers/user.controller.js';
+import { loginUser, registerUser, logoutUser, profileUser } from '../controllers/user.controller.js';
 import { body } from 'express-validator'
+import authUser from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
-router.get('/login',
+router.post('/login',
   body('email').isEmail().isLength({ min: 3 }).withMessage('Invalid Email'),
   body('password').trim().notEmpty(),
   (req, res) => {
@@ -19,8 +20,10 @@ router.post('/register',
     registerUser(req, res);
   })
 
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   logoutUser(req, res);
 })
+
+router.get('/profile', authUser, profileUser)
 
 export default router

@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator"
 import { createUser } from "../services/user.services.js"
 import UserModel from "../models/user.model.js";
+import BlackListToken from "../models/blocklistToken.model.js";
 
 const registerUser = async (req, res, next) => {
   const errors = validationResult(req);
@@ -26,6 +27,7 @@ const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   const user = await UserModel.findOne({ email }).select('+password');
+
   if (!user) {
     return res.status(401).json({ message: "Invalid username or password" })
   } else {
@@ -43,8 +45,15 @@ const loginUser = async (req, res, next) => {
 }
 
 const logoutUser = async (req, res, next) => {
+  const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+  await BlackListToken.create({ token });
   res.clearCookie('token');
   res.status(200).json({ message: "user logged out" })
 }
 
-export { registerUser, loginUser, logoutUser }
+const profileUser = async (req, res, next) => {
+  // console.log(req.user)
+  res.status(200).json({ user: req.user, message: "user loggedin" })
+}
+
+export { registerUser, loginUser, logoutUser, profileUser }
