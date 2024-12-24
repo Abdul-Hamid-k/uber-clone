@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: [8, 'password should be at least 2 character lond'],
+    minlength: [8, 'password should be at least 2 character long'],
     select: false,
   },
   email: {
@@ -26,7 +26,8 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
     lowercase: true,
-    minlength: [13, 'email should be at least 2 character lond']
+    minlength: [13, 'email should be at least 2 character long'],
+    match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, "Invalid email"]
   },
   socketId: {
     type: String

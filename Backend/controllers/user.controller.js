@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator"
-import { createUser } from "../services/user.services.js"
+import { createUser } from "../services/user.service.js"
 import UserModel from "../models/user.model.js";
 import BlackListToken from "../models/blocklistToken.model.js";
 
@@ -9,8 +9,13 @@ const registerUser = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array(), message: "Invalid arguments" });
   }
-
   const { fullname, email, password } = req.body;
+
+  const user = await UserModel.findOne({ email })
+  if (user) {
+    return res.status(400).json({ message: "User already exists" })
+  }
+
   const newUser = await createUser({ firstname: fullname.firstname, lastname: fullname.lastname, email, password })
   const token = await newUser.generateAuthToken();
   res.cookie('token', token)
@@ -32,7 +37,7 @@ const loginUser = async (req, res, next) => {
     return res.status(401).json({ message: "Invalid username or password" })
   } else {
     const isMatch = await user.comparePassword(password);
-    // console.log("mach:", isMatch);
+    console.log("mach:", isMatch, user);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid username or password" });
     } else {
