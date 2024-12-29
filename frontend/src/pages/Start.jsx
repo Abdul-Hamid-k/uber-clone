@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Home = () => {
+const Start = () => {
   return (
     <div>
       {/* background */}
@@ -22,4 +22,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Start

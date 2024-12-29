@@ -15,12 +15,12 @@ router.post('/login',
 router.post('/register',
   body('email').isEmail().withMessage('Invalid Email'),
   body('password').trim().notEmpty().isLength({ min: 8 }),
-  body('fullname.firstname').isLength({ min: 3 }).withMessage('First name must be at least 3 characters long'),
+  body('fullname.firstname').isLength({ min: 3 }).withMessage('First ddd name must be at least 3 characters long'),
   (req, res) => {
     registerUser(req, res);
   })
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   logoutUser(req, res);
 })
 

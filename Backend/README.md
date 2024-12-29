@@ -153,6 +153,10 @@ Example:
 
 This endpoint is used to get the profile of the currently authenticated user (if token is in cookie or header).
 
+### Authorization:
+
+Requires a valid JWT token in the authorization header: `Bearer <token>`
+
 ### Responses:
 
 #### Success (200):
@@ -396,6 +400,10 @@ Example:
 ### Description:
 
 This endpoint is used to get the profile of the currently authenticated captain (if token is in cookie or header).
+
+### Authorization:
+
+Requires a valid JWT token in the authorization header: `Bearer <token>`
 
 ### Responses:
 

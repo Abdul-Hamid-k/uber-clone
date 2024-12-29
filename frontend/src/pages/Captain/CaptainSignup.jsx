@@ -1,26 +1,30 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { CaptainDataContext } from '../../context/CaptainContext'
 
 const CaptainSignup = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [color, setColor] = useState('')
   const [plateNumber, setPlateNumber] = useState('')
   const [capacity, setCapacity] = useState('')
   const [vehicleType, setVehicleType] = useState('')
-  const [captainData, setCaptainData] = useState({})
 
-  const vehicleTypes = ['Car', 'Motorcycle', 'Auto']
+  const { captain, setCaptain } = useContext(CaptainDataContext)
+
+  const navigate = useNavigate()
+
 
   const submitHandler = (e) => {
     e.preventDefault()
-    setCaptainData({
+    const captainData = {
       fullname:
       {
-        firstName,
-        lastName,
+        firstname,
+        lastname,
       },
       email,
       password,
@@ -28,12 +32,25 @@ const CaptainSignup = () => {
         color,
         plate: plateNumber,
         capacity,
-        vehicle: vehicleType
+        vehicleType
       }
-    })
+    }
 
-    setFirstName('')
-    setLastName('')
+    // console.log(captainData)
+
+    axios.post(`${import.meta.env.VITE_BASE_URL}/captain/register`, captainData)
+      .then(response => {
+        if (response.status === 201) {
+          const data = response.data;
+          setCaptain(data.captain)
+          localStorage.setItem('token', data.token)
+          navigate('/captain-home')
+        }
+      }).catch(err => { console.error('Captain Signup Error: ' + err) });
+
+
+    setFirstname('')
+    setLastname('')
     setEmail('')
     setPassword('')
     setColor('')
@@ -61,16 +78,16 @@ const CaptainSignup = () => {
               <input
                 type="text"
                 required
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                value={firstname}
+                onChange={(e) => setFirstname(e.target.value)}
                 className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-base placeholder:text-sm w-full'
                 placeholder='Jon' />
 
               <input
                 type="text"
                 required
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
                 className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-base placeholder:text-sm w-full'
                 placeholder='Doe' />
 
@@ -134,10 +151,10 @@ const CaptainSignup = () => {
               onChange={(e) => setVehicleType(e.target.value)}
               className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-base placeholder:text-sm w-full'
             >
-              <option value="">Seletect Type</option>
-              {vehicleTypes.map((type, index) => (
-                <option key={index} className='' value={type}>{type}</option>
-              ))}
+              <option className='' value='' disabled>Seletect Type</option>
+              <option className='' value='car'>Car</option>
+              <option className='' value='motorcycle'>Motorcycle</option>
+              <option className='' value='auto'>Auto</option>
             </select>
           </div>
 

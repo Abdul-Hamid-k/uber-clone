@@ -11,23 +11,22 @@ router.get('/', (req, res) => {
 
 router.post(
   '/register',
-  body('fullname.firstname').trim().notEmpty().isLength({ min: 3 }).withMessage('Firstname must be at least 3 characters long'),
-  body('fullname.lastname').trim().isLength({ min: 3 }).withMessage('Lastname must be at least 3 characters long'),
-  body('email').trim().isEmail().withMessage('Invalid email'),
-  body('password').trim().notEmpty().isLength({ min: 8 }),
-  body('vehicle.color').trim().notEmpty().isLength({ min: 3 }).withMessage('Color must be at least 3 characters long'),
-  body('vehicle.plate').trim().notEmpty().isLength({ min: 3 }).withMessage('Plate must be at least 3 characters long'),
-  body('vehicle.capacity').trim().notEmpty().isInt({ min: 1 }).withMessage('Capacity must be at least 1'),
-  body('vehicle.vehicleType').trim().notEmpty().withMessage('Vehicle type is required'),
+  body('fullname.firstname').isLength({ min: 3 }).withMessage('Firstname must be at least 3 characters long'),
+  body('email').isEmail().withMessage('Invalid email'),
+  body('password').isLength({ min: 8 }),
+  body('vehicle.color').isLength({ min: 3 }).withMessage('Color must be at least 3 characters long'),
+  body('vehicle.plate').isLength({ min: 3 }).withMessage('Plate must be at least 3 characters long'),
+  body('vehicle.capacity').isInt({ min: 1 }).withMessage('Capacity must be at least 1'),
+  body('vehicle.vehicleType').isIn(['car', 'motorcycle', 'auto']).withMessage('Invalid vehicle type'),
   registerCaptain)
 
 router.post(
   '/login',
-  body('email').trim().isEmail().withMessage('Invalid email'),
-  body('password').trim().isLength({ min: 8 }),
+  body('email').isEmail().withMessage('Invalid email'),
+  body('password').isLength({ min: 8 }),
   loginCaptain)
 
-router.post('/logout', logoutCaptain)
+router.get('/logout', logoutCaptain)
 
 router.get('/profile', authCaptain, profileCaptain)
 

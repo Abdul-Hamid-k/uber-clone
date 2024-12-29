@@ -1,27 +1,45 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { UserDataContext } from '../../context/UserContext'
 
 const UserSignup = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userData, setUserData] = useState({})
+  // const [user, setUser] = useState({})
 
-  const submitHandler = (e) => {
+  const { user, setUser } = useContext(UserDataContext)
+
+  const navigate = useNavigate()
+
+  const submitHandler = async (e) => {
     e.preventDefault()
-    setUserData({
+    const newUser = {
       fullname:
       {
-        firstName,
-        lastName,
+        firstname,
+        lastname,
       },
       email,
       password
-    })
+    }
+    // console.log(`${import.meta.env.VITE_BASE_URL}/user/register`)
+    const responce = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`, newUser)
 
-    setFirstName('')
-    setLastName('')
+    console.log(responce)
+    if (responce.status === 201) {
+      const data = responce.data
+      setUser(data.user)
+      localStorage.setItem('token', data.token)
+      navigate('/home')
+    } else if (responce.status === 404) {
+      console.error('Error')
+    }
+
+    setFirstname('')
+    setLastname('')
     setEmail('')
     setPassword('')
   }
@@ -43,16 +61,16 @@ const UserSignup = () => {
             <input
               type="text"
               required
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={firstname}
+              onChange={(e) => setFirstname(e.target.value)}
               className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-base placeholder:text-sm w-full'
               placeholder='Jon' />
 
             <input
               type="text"
               required
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
               className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-base placeholder:text-sm w-full'
               placeholder='Doe' />
 
