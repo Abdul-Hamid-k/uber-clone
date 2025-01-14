@@ -35,7 +35,12 @@ const CaptainProtectedWrapper = ({ children }) => {
 
 
   return (
-    <>{children}</>
+    <>
+      {isLoading
+        ? <div className="flex h-screen justify-center items-center">Loading ...</div>
+        : <> {children} </>
+      }
+    </>
   )
 }
 

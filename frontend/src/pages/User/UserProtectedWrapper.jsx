@@ -38,7 +38,12 @@ const UserProtectedWrapper = ({ children }) => {
   }, [token])
 
   return (
-    <>{children}</>
+    <>
+      {isLoading
+        ? <div className="flex h-screen justify-center items-center">Loading ...</div>
+        : <> {children} </>
+      }
+    </>
   )
 }
 

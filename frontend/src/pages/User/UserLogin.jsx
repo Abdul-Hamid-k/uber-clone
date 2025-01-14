@@ -29,8 +29,6 @@ const UserLogin = () => {
     setPassword('')
   }
 
-
-
   return (
     <div className=' md:justify-center md:gap-24 md:items-center flex flex-col justify-between h-screen px-4 py-5 '>
 
