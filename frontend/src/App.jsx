@@ -13,6 +13,8 @@ import CaptainLogin from './pages/Captain/CaptainLogin'
 import CaptainSignup from './pages/Captain/CaptainSignup'
 import CaptainProtectedWrapper from './pages/Captain/CaptainProtectedWrapper'
 import CaptainLogout from './pages/Captain/CaptionLogout'
+import Riding from './pages/User/Riding'
+import CaptainRiding from './pages/Captain/CaptainRiding'
 
 const BrowserRouter = createBrowserRouter([
   {
@@ -33,6 +35,12 @@ const BrowserRouter = createBrowserRouter([
   }, {
     path: '/home',
     element: <UserProtectedWrapper> <Home /> </UserProtectedWrapper>
+  }, {
+    path: '/riding',
+    element: <Riding />
+  }, {
+    path: '/captain-riding',
+    element: <CaptainRiding />
   }, {
     path: '/captain-home',
     element: <CaptainProtectedWrapper> <CaptainHome /> </CaptainProtectedWrapper>

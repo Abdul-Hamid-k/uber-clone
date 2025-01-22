@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import LocationSearchPanel from '../../componenets/LocationSearchPanel'
-import VehiclePanel from '../../componenets/VehiclePanel'
-import ConfirmRide from '../../componenets/ConfirmRide'
-import WaitingForDriver from '../../componenets/WaitingForDriver'
-import LookingForDriver from '../../componenets/LookingForDriver'
+import LocationSearchPanel from '../../componenets/User/LocationSearchPanel'
+import VehiclePanel from '../../componenets/User/VehiclePanel'
+import ConfirmRide from '../../componenets/User/ConfirmRide'
+import WaitingForDriver from '../../componenets/User/WaitingForDriver'
+import LookingForDriver from '../../componenets/User/LookingForDriver'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const [panelOpen, setPanelOpen] = useState(false)
@@ -20,9 +21,11 @@ const Home = () => {
 
   const panelRef = useRef(null)
 
+  const navigate = useNavigate()
+
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log(pickup, destination)
+    // console.log(pickup, destination)
     // make API call to get ride recommendations
   }
 
@@ -44,16 +47,26 @@ const Home = () => {
     }
   }, [panelOpen])
 
-  console.log(panelOpen, vehiclePanelOpen, confirmRidePanelOpen, waitForDriverPanelOpen)
+  // console.log(panelOpen, vehiclePanelOpen, confirmRidePanelOpen, waitForDriverPanelOpen)
 
 
   return (
     <div className='h-screen relative overflow-hidden'>
-      {/* uber-logo */}
-      <img src="https://www.logo.wine/a/logo/Uber/Uber-Logo.wine.svg"
-        alt="uber logo"
-        className='w-16 absolute top-4 left-5'
-      />
+
+      <div className="flex justify-between p-5 bg-transparent fixed top-0 w-full z-10">
+        {/* uber-logo */}
+        <img src="https://www.logo.wine/a/logo/Uber/Uber-Logo.wine.svg"
+          alt="uber logo"
+          className='w-16 '
+        />
+
+        {/* logout */}
+        <div
+          onClick={() => navigate('/login')}
+          className=" h-10 w-10 rounded-full flex justify-center items-center cursor-pointer bg-white">
+          <i className=" text-xl font-medium ri-logout-box-r-line"></i>
+        </div>
+      </div>
 
       {/* map */}
       <div
@@ -74,7 +87,7 @@ const Home = () => {
           <p className='font-semibold text-xl flex justify-between'>
             Find a trip
             {panelOpen &&
-              <i className="mr-2 ri-arrow-down-s-line"
+              <i className="mr-2 ri-arrow-down-s-line cursor-pointer"
                 onClick={() => setPanelOpen(false)}></i>
             }
           </p>
@@ -102,7 +115,7 @@ const Home = () => {
 
             <div className=" flex justify-center gap-1 items-center px-5 mt-3  py-2 bg-gray-200 rounded-full w-fit">
               <button className=' font-medium'>Leave Now </button>
-              <i className="ri-arrow-down-s-line"></i>
+              <i className="ri-arrow-down-s-line cursor-pointer"></i>
             </div>
           </form>
         </div>

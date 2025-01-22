@@ -17,14 +17,14 @@ const UserProtectedWrapper = ({ children }) => {
     }
     else {
       setIsLoading(true)
-      console.log(`${import.meta.env.VITE_BASE_URL}/user/profile`);
+      // console.log(`${import.meta.env.VITE_BASE_URL}/user/profile`);
 
       axios.get(`${import.meta.env.VITE_BASE_URL}/user/profile`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         setUser(res.data.captain)
         setIsLoading(false)
       }).catch(err => {

@@ -16,7 +16,7 @@ const UserLogout = () => {
 
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.status === 200) {
           localStorage.removeItem('token')
           navigate('/login')

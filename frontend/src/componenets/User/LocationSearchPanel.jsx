@@ -25,7 +25,7 @@ const LocationSearchPanel = ({ setVehiclePanelOpen, setPanelOpen }) => {
             setPanelOpen(false)
           }}
           key={index}
-          className='flex  items-center px-2 py-1 my-2 active:border-2 border-white active:border-black rounded-xl justify-start  gap-3 cursor-pointer'>
+          className='flex  items-center px-2 py-1 my-2 active:border-[0.1rem] border-white active:border-black rounded-xl justify-start  gap-3 cursor-pointer'>
           {/* Sample data */}
           <i className="ri-map-pin-2-fill bg-gray-200 flex justify-center items-center h-9 w-9 rounded-full shrink-0"></i>
           <div className="">

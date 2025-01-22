@@ -24,12 +24,14 @@ const LookingForDriver = ({ lookingForDriverPanelOpen, setLookingForDriverPanelO
       <div
         ref={lookingForDriverRef}
         className="fixed left-0 bottom-0 w-full rounded-t-2xl px-3 py-6 bg-white translate-y-full">
+
         {/* close arrow */}
         <h5
           className='w-[100%] text-center mx-auto left-0 top-0 absolute'
           onClick={() => setLookingForDriverPanelOpen(false)}>
-          <i className="ri-arrow-down-wide-line"></i>
+          <i className="ri-arrow-down-wide-line cursor-pointer"></i>
         </h5>
+
         {/* heading */}
         <h5 className='font-medium text-xl text-center'>Looking for ride nearby</h5>
 
@@ -53,7 +55,7 @@ const LookingForDriver = ({ lookingForDriverPanelOpen, setLookingForDriverPanelO
         {/* ride details */}
         {/* address */}
         {/* Sample User location data */}
-        <div className='flex items-center px-2 py-1 my-2 justify-start  gap-3 cursor-pointer border-t-2 border-gray-200'>
+        <div className='flex items-center px-2 py-1 my-2 justify-start  gap-3 border-t-[0.1rem] border-gray-200'>
           <i className="ri-map-pin-user-fill text-xl flex justify-center items-center h-9 w-9 rounded-full shrink-0"></i>
           <div className="">
             <h6 className='font-medium'>MP Nagar</h6>
@@ -63,7 +65,7 @@ const LookingForDriver = ({ lookingForDriverPanelOpen, setLookingForDriverPanelO
 
         {/* address */}
         {/* Sample destiation location data */}
-        <div className='flex items-center px-2 py-1 my-2 justify-start  gap-3 cursor-pointer border-t-2 border-gray-200'>
+        <div className='flex items-center px-2 py-1 my-2 justify-start  gap-3 border-t-[0.1rem] border-gray-200'>
           <i className="ri-map-pin-2-fill text-xl flex justify-center items-center h-9 w-9 rounded-full shrink-0"></i>
 
           <div className="">
@@ -74,7 +76,7 @@ const LookingForDriver = ({ lookingForDriverPanelOpen, setLookingForDriverPanelO
 
         {/* cost */}
         {/* Sample data */}
-        <div className='flex items-center px-2 py-1 my-2 justify-start  gap-3 cursor-pointer border-t-2 border-gray-200'>
+        <div className='flex items-center px-2 py-1 my-2 justify-start  gap-3 border-t-[0.1rem] border-gray-200'>
           <i className="ri-bank-card-2-fill flex justify-center items-center text-xl h-9 w-9 rounded-full shrink-0"></i>
           <div className="">
             <h6 className='font-medium'>₹192.20</h6>

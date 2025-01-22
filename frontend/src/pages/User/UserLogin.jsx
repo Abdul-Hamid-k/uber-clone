@@ -17,7 +17,7 @@ const UserLogin = () => {
     const userData = { email, password }
     axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`, userData).then(responce => {
       if (responce.status === 200) {
-        console.log(responce)
+        // console.log(responce)
         const data = responce.data
         setUser(data.user)
         localStorage.setItem('token', data.token)

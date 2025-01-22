@@ -40,23 +40,22 @@ const CaptainLogin = () => {
 
         {/* user form */}
         <form onSubmit={submitHandler}>
-
-          <h3 className='text-lg'>What's your email?</h3>
+          <h3 className='text-base font-medium'>What's your email?</h3>
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-lg placeholder:text-base w-full'
+            className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-base placeholder:text-sm w-full'
             placeholder='Jon.Doe@example.com' />
 
-          <h3 className='text-lg mt-4'>Password</h3>
+          <h3 className='text-base font-medium mt-4'>Password</h3>
           <input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-lg placeholder:text-base w-full'
+            className='bg-gray-100 mt-1 px-3 py-2 rounded grow outline-none text-base placeholder:text-sm w-full'
             placeholder='**********' />
 
           <button
@@ -64,7 +63,6 @@ const CaptainLogin = () => {
             className='text-center mt-4 bg-[#111] text-white w-full py-3 font-medium text-xl rounded-md'>
             Login
           </button>
-
         </form>
 
         {/* create account link */}
